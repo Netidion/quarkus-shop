@@ -28,7 +28,7 @@ public class Order extends AbstractEntity{
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private OrderStatus status;
+    private OrderStatus orderStatus;
 
     @Column(name = "shipped")
     private ZonedDateTime shipped;
@@ -46,10 +46,10 @@ public class Order extends AbstractEntity{
     @OneToOne
     private Cart cart;
 
-    public Order(@NotNull BigDecimal price, @NotNull OrderStatus status, ZonedDateTime shipped,
+    public Order(@NotNull BigDecimal price, @NotNull OrderStatus orderStatus, ZonedDateTime shipped,
                  Payment payment, Address shipmentAddress, Set<OrderItem> orderItems, Cart cart) {
         this.price = price;
-        this.status = status;
+        this.orderStatus = orderStatus;
         this.shipped = shipped;
         this.payment = payment;
         this.shipmentAddress = shipmentAddress;
@@ -62,7 +62,7 @@ public class Order extends AbstractEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(price, order.price) && status == order.status
+        return Objects.equals(price, order.price) && orderStatus == order.orderStatus
                 && Objects.equals(shipped, order.shipped) && Objects.equals(payment, order.payment)
                 && Objects.equals(shipmentAddress, order.shipmentAddress)
                 && Objects.equals(orderItems, order.orderItems) && Objects.equals(cart, order.cart);
@@ -70,6 +70,6 @@ public class Order extends AbstractEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hash(price, status, shipped, payment, shipmentAddress, orderItems, cart);
+        return Objects.hash(price, orderStatus, shipped, payment, shipmentAddress, orderItems, cart);
     }
 }
