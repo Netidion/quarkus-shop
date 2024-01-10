@@ -3,7 +3,9 @@ package com.vnet.lab.entity;
 import com.vnet.lab.utils.enums.CartStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
@@ -17,13 +19,12 @@ public class Cart extends AbstractEntity{
     @ManyToOne
     private final Customer customer;
 
-
     @NotNull
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private final CartStatus status;
+    private CartStatus status;
 
-    public Cart(Customer customer, @NonNull CartStatus status) {
+    public Cart(Customer customer, @NotNull CartStatus status) {
         this.customer = customer;
         this.status = status;
     }
