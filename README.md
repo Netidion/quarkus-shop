@@ -71,3 +71,6 @@ Create your first JPA entity
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+### Postgresql docker image
+docker run -d --name demo-postgres -e POSTGRES_USER=developer -e POSTGRES_PASSWORD=p4SSWord -e POSTGRES_BD=demo -p 5432:5432 postgres:13
