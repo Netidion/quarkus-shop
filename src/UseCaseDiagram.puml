@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+left to right direction
+:Shop Manager: as Admin
+:Customer: as User
+
+User --> (Register)
+User --> (Browse Product)
+User --> (Search Product)
+User --> (Create Cart)
+User --> (Update Cart)
+User --> (View Cart)
+User --> (Update Profile)
+User --> (Browse Product Reviews)
+User --> (Write Product Reviews)
+User --> (Checkout)
+
+(Register) ...> (Login)
+(Browse Product) ...> (Login)
+(Search Product) ...> (Login)
+(Create Cart) ...> (Login)
+(Update Cart) ...> (Login)
+(View Cart) ...> (Login)
+(Update Profile) ...> (Login)
+(Browse Product Reviews) ...> (Login)
+(Write Product Reviews) ...> (Login)
+(Checkout) ...> (Login)
+
+
+Admin --> (Add Product)
+Admin --> (Update Product)
+Admin --> (Remove Product)
+
+(Add Product) ...> (Login)
+(Update Product) ...> (Login)
+(Remove Product) ...> (Login)
+
+note left of Admin: Actions allowed \nto Shop Manager
+note left of User: Actions allowed \nto Customer
+@enduml
