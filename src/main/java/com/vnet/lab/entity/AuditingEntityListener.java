@@ -1,4 +1,4 @@
-package com.vnet.lab.utils;
+package com.vnet.lab.entity;
 
 import com.vnet.lab.entity.AbstractEntity;
 import jakarta.persistence.PrePersist;

@@ -1,6 +1,5 @@
 package com.vnet.lab.entity;
 
-import com.vnet.lab.utils.AuditingEntityListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
