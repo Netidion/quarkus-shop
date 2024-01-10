@@ -22,16 +22,16 @@ public class Payment extends AbstractEntity{
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "payment_status")
-    private PaymentStatus paymentStatus;
+    @Column(name = "status")
+    private PaymentStatus status;
 
     @NotNull
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    public Payment(String ePaymentId, @NotNull PaymentStatus paymentStatus, @NotNull BigDecimal amount) {
+    public Payment(String ePaymentId, @NotNull PaymentStatus status, @NotNull BigDecimal amount) {
         this.ePaymentId = ePaymentId;
-        this.paymentStatus = paymentStatus;
+        this.status = status;
         this.amount = amount;
     }
 
@@ -40,12 +40,12 @@ public class Payment extends AbstractEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return Objects.equals(ePaymentId, payment.ePaymentId) && paymentStatus == payment.paymentStatus
+        return Objects.equals(ePaymentId, payment.ePaymentId) && status == payment.status
                 && Objects.equals(amount, payment.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ePaymentId, paymentStatus, amount);
+        return Objects.hash(ePaymentId, status, amount);
     }
 }

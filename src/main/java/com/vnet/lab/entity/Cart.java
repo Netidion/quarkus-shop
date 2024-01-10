@@ -19,13 +19,13 @@ public class Cart extends AbstractEntity{
 
 
     @NotNull
-    @Column(name = "cart_status", nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private final CartStatus cartStatus;
+    private final CartStatus status;
 
-    public Cart(Customer customer, @NonNull CartStatus cartStatus) {
+    public Cart(Customer customer, @NonNull CartStatus status) {
         this.customer = customer;
-        this.cartStatus = cartStatus;
+        this.status = status;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class Cart extends AbstractEntity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cart cart = (Cart) o;
-        return Objects.equals(customer, cart.customer) && cartStatus == cart.cartStatus;
+        return Objects.equals(customer, cart.customer) && status == cart.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customer, cartStatus);
+        return Objects.hash(customer, status);
     }
 }
