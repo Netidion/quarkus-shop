@@ -80,7 +80,7 @@ public class CartService {
                 .orElseThrow(() -> new IllegalStateException("Invalid number of active carts detected!!!"));
     }
 
-    private static CartDto mapToDto(Cart cart) {
+    static CartDto mapToDto(Cart cart) {
         return new CartDto(cart.getId(), CustomerService.mapToDto(cart.getCustomer()), cart.getStatus().name());
     }
 }
