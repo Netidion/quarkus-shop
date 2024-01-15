@@ -65,7 +65,7 @@ public class ProductService {
                 .map(ProductService::mapToDto).collect(Collectors.toList());
     }
 
-    private static ProductDto mapToDto(Product product) {
+    static ProductDto mapToDto(Product product) {
         return new ProductDto(product.getId(), product.getName(), product.getDescription(), product.getPrice(),
                 product.getProductStatus().name(), product.getSalesCounter(),
                 product.getReviews().stream().map(ReviewService::mapToDto).collect(Collectors.toSet()),
