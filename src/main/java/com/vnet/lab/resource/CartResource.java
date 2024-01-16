@@ -15,7 +15,7 @@ public class CartResource {
 
     /**
      * Listing all carts: HTTP GET on path /api/carts
-     * @return CartDto
+     * @return List of CartDto
      */
     @GET
     public List<CartDto> findAll(){
@@ -33,7 +33,7 @@ public class CartResource {
     }
 
     /**
-     * Listing active carts for a given customer id: HTTP GET on path /api/carts/customer/{id}
+     * Listing active cart for a given customer id: HTTP GET on path /api/carts/customer/{id}
      * @param id customerId
      * @return CartDto
      */
