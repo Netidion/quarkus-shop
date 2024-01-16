@@ -4,6 +4,7 @@ import com.vnet.lab.utils.enums.CartStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,13 +12,14 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "carts")
 public class Cart extends AbstractEntity{
 
     @ManyToOne
-    private final Customer customer;
+    private Customer customer;
 
     @NotNull
     @Column(name = "status", nullable = false)
@@ -28,6 +30,7 @@ public class Cart extends AbstractEntity{
         this.customer = customer;
         this.status = status;
     }
+
 
     @Override
     public boolean equals(Object o) {
