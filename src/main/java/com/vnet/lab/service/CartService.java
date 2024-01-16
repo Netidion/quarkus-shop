@@ -71,7 +71,7 @@ public class CartService {
         this.cartRepository.save(cart);
     }
 
-    private CartDto getActiveCart(Long customerId) {
+    public CartDto getActiveCart(Long customerId) {
         List<Cart> carts = this.cartRepository.findByStatusAndCustomerId(CartStatus.NEW, customerId);
 
         return Optional.ofNullable(carts)
