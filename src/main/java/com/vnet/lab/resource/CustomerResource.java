@@ -64,7 +64,7 @@ public class CustomerResource {
     }
 
     /**
-     * Deleting a customer for a given customer id: HTTP POST on path /api/customers/{id}
+     * Deleting a customer for a given customer id: HTTP DELETE on path /api/customers/{id}
      * @param id customerId
      */
     @DELETE
