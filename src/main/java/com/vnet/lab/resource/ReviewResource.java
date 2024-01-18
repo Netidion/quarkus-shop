@@ -4,10 +4,12 @@ import com.vnet.lab.dto.ReviewDto;
 import com.vnet.lab.service.ReviewService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/reviews")
+@Tag(name = "review", description = "All review methods")
 public class ReviewResource {
 
     @Inject

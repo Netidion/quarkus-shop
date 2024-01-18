@@ -4,10 +4,12 @@ import com.vnet.lab.dto.PaymentDto;
 import com.vnet.lab.service.PaymentService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/payments")
+@Tag(name = "payment", description = "All payment methods")
 public class PaymentResource {
 
     @Inject

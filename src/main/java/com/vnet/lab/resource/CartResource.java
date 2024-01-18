@@ -4,10 +4,12 @@ import com.vnet.lab.dto.CartDto;
 import com.vnet.lab.service.CartService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/carts")
+@Tag(name = "cart", description = "All cart methods")
 public class CartResource {
 
     @Inject

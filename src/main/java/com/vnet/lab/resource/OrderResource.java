@@ -4,10 +4,12 @@ import com.vnet.lab.dto.OrderDto;
 import com.vnet.lab.service.OrderService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/orders")
+@Tag(name = "order", description = "All order methods")
 public class OrderResource {
 
     @Inject

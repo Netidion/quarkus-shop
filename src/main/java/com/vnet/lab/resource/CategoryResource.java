@@ -5,10 +5,12 @@ import com.vnet.lab.dto.ProductDto;
 import com.vnet.lab.service.CategoryService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/categories")
+@Tag(name = "category", description = "All category methods")
 public class CategoryResource {
 
     @Inject

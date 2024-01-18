@@ -4,10 +4,12 @@ import com.vnet.lab.dto.ProductDto;
 import com.vnet.lab.service.ProductService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/products")
+@Tag(name = "product", description = "All product methods")
 public class ProductResource {
 
     @Inject
