@@ -66,8 +66,8 @@ public class OrderResource {
 
     /**
      * Checking if an order with given id exists: HTTP GET on path /api/orders/exists/{id}
-     * @param id
-     * @return
+     * @param id orderId
+     * @return true/false if order exists or not
      */
     @GET
     @Path("/exists/{id}")
