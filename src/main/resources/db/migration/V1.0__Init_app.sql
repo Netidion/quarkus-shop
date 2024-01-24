@@ -27,7 +27,7 @@ VALUES
 INSERT INTO carts (id, created_date, last_modified, customer_id, status)
 VALUES
     (1,  current_timestamp, current_timestamp, 1, 'NEW'),
-    (2,  current_timestamp, current_timestamp, 2, 'CANCELED');
+    (2,  current_timestamp, current_timestamp, 2, 'CANCELLED');
 
 -- Insert sample data into the 'order_items' table
 INSERT INTO order_items (id, created_date, last_modified, quantity, order_id, product_id)
