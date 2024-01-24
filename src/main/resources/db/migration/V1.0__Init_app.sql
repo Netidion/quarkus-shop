@@ -1,3 +1,4 @@
+create table abstract_entities (id serial primary key, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone);
 create table customers (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, email varchar(255), enabled boolean not null, first_name varchar(255), last_name varchar(255), telephone varchar(255), primary key (id));
 create table carts (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, customer_id bigint, status varchar(255) not null, primary key (id));
 create table order_items (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, quantity bigint not null, order_id bigint, product_id bigint, primary key (id));
@@ -21,7 +22,8 @@ create sequence reviews_SEQ start with 1 increment by 50;
 INSERT INTO customers (id, created_date, last_modified, email, enabled, first_name, last_name, telephone)
 VALUES
     (1, current_timestamp, current_timestamp, 'john.doe@example.com', true, 'John', 'Doe', '123456789'),
-    (2, current_timestamp, current_timestamp, 'jane.smith@example.com', true, 'Jane', 'Smith', '987654321');
+    (2, current_timestamp, current_timestamp, 'jane.smith@example.com', true, 'Jane', 'Smith', '987654321'),
+    (3, current_timestamp, current_timestamp, 'max.black@example.com', true, 'Max', 'Black', '2569874563');
 
 -- Insert a record into the 'carts' table for initialization
 INSERT INTO carts (id, created_date, last_modified, customer_id, status)
