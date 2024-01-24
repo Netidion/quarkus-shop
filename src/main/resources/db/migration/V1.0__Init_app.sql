@@ -4,9 +4,11 @@ create table order_items (id bigint not null, created_date timestamp(6) with tim
 create table orders (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, total_price numeric(10,2) not null, address_1 varchar(255), address_2 varchar(255), city varchar(255), country varchar(2) not null, post_code varchar(10) not null, shipped timestamp(6) with time zone, status varchar(255) not null check (status in ('CREATION','PAID','SHIPPED','DELIVERED','CLOSED')), cart_id bigint, payment_id bigint, primary key (id));
 create table payments (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, amount numeric(38,2) not null, e_payment_id varchar(255), status varchar(255) check (status in ('ACCEPTED','PENDING','REFUSED','ERROR')), primary key (id));
 create table products (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, description varchar(255) not null, name varchar(255) not null, price numeric(10,2) not null, product_status smallint not null check (product_status between 0 and 1), sales_counter integer, category_id bigint, primary key (id));
+create table categories (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, description varchar(255) not null, name varchar(255) not null, primary key (id));
 create table products_reviews (product_id bigint not null, reviews_id bigint not null, primary key (product_id, reviews_id));
 create table reviews (id bigint not null, created_date timestamp(6) with time zone not null, last_modified timestamp(6) with time zone, description varchar(255) not null, rating bigint not null, title varchar(255) not null, primary key (id));
 
+create sequence customers_SEQ start with 1 increment by 50;
 create sequence carts_SEQ start with 1 increment by 50;
 create sequence categories_SEQ start with 1 increment by 50;
 create sequence order_items_SEQ start with 1 increment by 50;
@@ -52,6 +54,13 @@ VALUES
     (101, current_timestamp, current_timestamp, 'Product 1 description', 'Product 1', 49.99, 1, 100, 201),
     (102, current_timestamp, current_timestamp, 'Product 2 description', 'Product 2', 29.99, 1, 75, 202),
     (103, current_timestamp, current_timestamp, 'Product 3 description', 'Product 3', 69.99, 0, 150, 203);
+
+-- Insert sample data into the 'customers' table
+INSERT INTO categories (id, created_date, last_modified, name, description)
+VALUES
+    (1, current_timestamp, current_timestamp, 'Category 1', 'Category 1 description'),
+    (2, current_timestamp, current_timestamp, 'Category 2', 'Category 2 description'),
+    (3, current_timestamp, current_timestamp, 'Category 3', 'Category 3 description');
 
 -- Insert sample data into the 'products_reviews' table
 INSERT INTO products_reviews (product_id, reviews_id)
