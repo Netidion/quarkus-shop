@@ -11,7 +11,6 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -74,10 +73,15 @@ public class CartService {
     public CartDto getActiveCart(Long customerId) {
         List<Cart> carts = this.cartRepository.findByStatusAndCustomerId(CartStatus.NEW, customerId);
 
-        return Optional.ofNullable(carts)
-                .filter(c -> c.size() == 1)
-                .map(c -> mapToDto(c.get(0)))
-                .orElseThrow(() -> new IllegalStateException("Invalid number of active carts detected!!!"));
+        if(carts != null) {
+            if(carts.size()==1){
+                return mapToDto(carts.get(0));
+            }
+            if(carts.size() > 1){
+                throw new IllegalStateException("Many active carts detected!!!");
+            }
+        }
+        return null;
     }
 
     static CartDto mapToDto(Cart cart) {
