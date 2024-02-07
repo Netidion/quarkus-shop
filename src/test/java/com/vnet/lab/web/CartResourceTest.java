@@ -166,6 +166,5 @@ public class CartResourceTest {
 
         delete("/carts/" + newCartId).then().statusCode(NO_CONTENT);
         delete("/customers/" + newCustomerId).then().statusCode(NO_CONTENT);
-
     }
 }
