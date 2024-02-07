@@ -20,6 +20,7 @@
     <junit-version>1.19.3</junit-version>
     <postgres.test.container.version>1.19.3</postgres.test.container.version>
     <jacoco-version>3.6.6</jacoco-version>
+    <sonar.projectKey>Netidion_quarkus-shop</sonar.projectKey>
     <sonar.organization>netislab</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
