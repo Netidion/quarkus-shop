@@ -162,7 +162,7 @@ public class CartResourceTest {
                 .statusCode(INTERNAL_SERVER_ERROR)
                 .body(containsString("There is already an active cart!"));
 
-        assertThat(newCartId).isNotNull();
+        assertThat(newCartId).isNotZero();
 
         delete("/carts/" + newCartId).then().statusCode(NO_CONTENT);
         delete("/customers/" + newCustomerId).then().statusCode(NO_CONTENT);
