@@ -20,8 +20,6 @@
     <junit-version>1.19.3</junit-version>
     <postgres.test.container.version>1.19.3</postgres.test.container.version>
     <jacoco-version>3.6.6</jacoco-version>
-    <sonar.projectKey>Netidion_quarkus-shop</sonar.projectKey>
-    <sonar.organization>netislab</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
   <dependencyManagement>
@@ -169,6 +167,16 @@
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.10.0.2594</version>
+        <configuration>
+          <goal>
+            <goalPrefix>sonarPrefix</goalPrefix>
+          </goal>
         </configuration>
       </plugin>
     </plugins>
