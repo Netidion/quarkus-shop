@@ -2,12 +2,15 @@ package com.vnet.lab.resource;
 
 import com.vnet.lab.dto.ProductDto;
 import com.vnet.lab.service.ProductService;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@Authenticated
 @Path("/products")
 @Tag(name = "product", description = "All product methods")
 public class ProductResource {
@@ -72,6 +75,7 @@ public class ProductResource {
      * @param productDto new product to be created
      * @return ProductDto new product created
      */
+    @RolesAllowed("admin")
     @POST
     public ProductDto create(ProductDto productDto){
         return this.productService.create(productDto);
@@ -81,6 +85,7 @@ public class ProductResource {
      * Deleting product for a given product id: HTTP DELETE on path /api/products/{id}
      * @param id id of product to be deleted
      */
+    @RolesAllowed("admin")
     @DELETE
     @Path("/{id}")
     public void delete(@PathParam("id") Long id){

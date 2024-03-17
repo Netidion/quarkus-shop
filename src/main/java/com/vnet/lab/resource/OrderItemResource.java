@@ -2,12 +2,14 @@ package com.vnet.lab.resource;
 
 import com.vnet.lab.dto.OrderItemDto;
 import com.vnet.lab.service.OrderItemService;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@Authenticated
 @Path("/order-items")
 @Tag(name = "order-item", description = "All order-item methods")
 public class OrderItemResource {

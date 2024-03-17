@@ -2,12 +2,15 @@ package com.vnet.lab.resource;
 
 import com.vnet.lab.dto.OrderDto;
 import com.vnet.lab.service.OrderService;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@Authenticated
 @Path("/orders")
 @Tag(name = "order", description = "All order methods")
 public class OrderResource {
@@ -19,6 +22,7 @@ public class OrderResource {
      * Retrieving all orders: HTTP GET on path /api/orders
      * @return List of OrderDto
      */
+    @RolesAllowed("admin")
     @GET
     public List<OrderDto> findAll(){
         return this.orderService.findAll();

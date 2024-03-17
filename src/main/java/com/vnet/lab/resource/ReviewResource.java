@@ -2,12 +2,15 @@ package com.vnet.lab.resource;
 
 import com.vnet.lab.dto.ReviewDto;
 import com.vnet.lab.service.ReviewService;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@Authenticated
 @Path("/reviews")
 @Tag(name = "review", description = "All review methods")
 public class ReviewResource {
@@ -53,6 +56,7 @@ public class ReviewResource {
      * Deleting a review with given id: HTTP POST on path /api/reviews/{id}
      * @param id reviewId
      */
+    @RolesAllowed("admin")
     @DELETE
     @Path("{id}")
     public void delete(@PathParam("id") Long id){

@@ -2,12 +2,14 @@ package com.vnet.lab.resource;
 
 import com.vnet.lab.dto.CustomerDto;
 import com.vnet.lab.service.CustomerService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@RolesAllowed("admin")
 @Path("/customers")
 @Tag(name = "customer", description = "All customer methods")
 public class CustomerResource {

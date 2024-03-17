@@ -3,12 +3,14 @@ package com.vnet.lab.resource;
 import com.vnet.lab.dto.CategoryDto;
 import com.vnet.lab.dto.ProductDto;
 import com.vnet.lab.service.CategoryService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+@RolesAllowed("admin")
 @Path("/categories")
 @Tag(name = "category", description = "All category methods")
 public class CategoryResource {
@@ -53,6 +55,7 @@ public class CategoryResource {
      * @param categoryDto new category to be inserted
      * @return CategoryDto new category inserted
      */
+    @RolesAllowed("admin")
     @POST
     public CategoryDto create(CategoryDto categoryDto){
         return this.categoryService.create(categoryDto);
@@ -62,6 +65,7 @@ public class CategoryResource {
      * Deleting category for a given category id: HTTP DELETE on path /api/categories/{id}
      * @param id category id
      */
+    @RolesAllowed("admin")
     @DELETE
     @Path("/{id}")
     public void delete(@PathParam("id") Long id){
