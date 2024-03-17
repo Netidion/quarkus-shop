@@ -52,7 +52,7 @@ public class UserResource {
     }
 
     @GET
-    @Path("/current/imfo-alternative")
+    @Path("/current/info-alternative")
     public Principal getCurrentUserInfoAlternative(@Context SecurityContext ctx) {
         return ctx.getUserPrincipal();
     }

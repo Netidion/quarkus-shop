@@ -79,4 +79,5 @@ docker run -d --name demo-postgres -e POSTGRES_USER=developer -e POSTGRES_PASSWO
 helm repo add codecentric https://codecentric.github.io/helm-charts
 helm install keycloak codecentric/keycloak
 
-docker run -d --name docker-keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -e DB_VENDOR=h2 -p 9080:8080 -p 8443:8443 -p 9990:9990 codecentric/keycloak start-dev
+### Keycloak docker image for local via docker run
+docker run -d --name docker-keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -e DB_VENDOR=h2 -p 9080:8080 -p 8443:8443 -p 9990:9990 quay.io/keycloak/keycloak:24.0.1 start-dev
