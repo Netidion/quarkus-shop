@@ -74,3 +74,6 @@ Easily start your Reactive RESTful Web Services
 
 ### Postgresql docker image
 docker run -d --name demo-postgres -e POSTGRES_USER=developer -e POSTGRES_PASSWORD=p4SSWord -e POSTGRES_DB=demo -p 5432:5432 postgres:13
+
+### Keycloak docker image
+docker run -d --name docker-keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -e DB_VENDOR=h2 -p 9080:8080 -p 8443:8443 -p 9990:9990 quay.io/keycloak/keycloak:latest start-dev
