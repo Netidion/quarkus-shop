@@ -19,7 +19,6 @@ import java.time.Duration;
 /**
  * Created by Neti on 3/17/2024
  */
-
 @Slf4j
 @Liveness
 @ApplicationScoped
@@ -27,7 +26,6 @@ public class KeycloakConnectionHealthCheck implements HealthCheck {
 
     @ConfigProperty(name = "mp.jwt.verify.publickey.location", defaultValue = "false")
     Provider<String> keycloakUrl;
-
 
     @Override
     public HealthCheckResponse call() {
