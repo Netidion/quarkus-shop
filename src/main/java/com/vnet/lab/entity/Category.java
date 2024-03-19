@@ -4,14 +4,15 @@ import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "categories")
@@ -25,21 +26,19 @@ public class Category extends AbstractEntity{
     @Column(name = "description", nullable = false)
     private String description;
 
-    public Category(@NotNull String name, @NotNull String description) {
-        this.name = name;
-        this.description = description;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Category category = (Category) o;
-        return Objects.equals(name, category.name) && Objects.equals(description, category.description);
+        return getId() != null && Objects.equals(getId(), category.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, description);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

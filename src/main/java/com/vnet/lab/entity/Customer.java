@@ -5,10 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "customers")
@@ -35,31 +34,25 @@ public class Customer extends AbstractEntity{
     private String telephone;
 
     @OneToMany(mappedBy = "customer")
+    @ToString.Exclude
     private Set<Cart> carts;
 
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
-    public Customer(String firstName, String lastName, String email,
-                    String telephone, Set<Cart> carts, Boolean enabled) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.telephone = telephone;
-        this.carts = carts;
-        this.enabled = enabled;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email) && Objects.equals(telephone, customer.telephone) && Objects.equals(carts, customer.carts) && Objects.equals(enabled, customer.enabled);
+        return getId() != null && Objects.equals(getId(), customer.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, email, telephone, carts, enabled);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

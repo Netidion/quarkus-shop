@@ -5,16 +5,12 @@ import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.util.Objects;
-
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Embeddable
 public class Address {
 
@@ -29,28 +25,11 @@ public class Address {
 
     @NotNull
     @Size(max = 10)
-    @Column(name = "post_code", length = 10, nullable = false)
+    @Column(name = "postcode", length = 10, nullable = false)
     private String postCode;
 
     @NotNull
     @Size(max = 2)
     @Column(name = "country", length = 2, nullable = false)
     private String country;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return Objects.equals(address1, address.address1)
-                && Objects.equals(address2, address.address2)
-                && Objects.equals(city, address.city)
-                && Objects.equals(postCode, address.postCode)
-                && Objects.equals(country, address.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(address1, address2, city, postCode, country);
-    }
 }

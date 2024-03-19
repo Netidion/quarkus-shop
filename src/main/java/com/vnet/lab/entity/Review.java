@@ -4,14 +4,15 @@ import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "reviews")
@@ -29,23 +30,19 @@ public class Review extends AbstractEntity{
     @Column(name = "rating", nullable = false)
     private Long rating;
 
-    public Review(@NotNull String title, @NotNull String description, @NotNull Long rating) {
-        this.title = title;
-        this.description = description;
-        this.rating = rating;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Review review = (Review) o;
-        return Objects.equals(title, review.title) && Objects.equals(description, review.description)
-                && Objects.equals(rating, review.rating);
+        return getId() != null && Objects.equals(getId(), review.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(title, description, rating);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

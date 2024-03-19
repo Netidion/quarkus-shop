@@ -3,10 +3,8 @@ package com.vnet.lab.entity;
 import com.vnet.lab.utils.enums.OrderStatus;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -16,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "orders")
@@ -41,35 +40,25 @@ public class Order extends AbstractEntity{
     private Address shipmentAddress;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Set<OrderItem> orderItems;
 
     @OneToOne
     private Cart cart;
 
-    public Order(@NotNull BigDecimal price, @NotNull OrderStatus status, ZonedDateTime shipped,
-                 Payment payment, Address shipmentAddress, Set<OrderItem> orderItems, Cart cart) {
-        this.price = price;
-        this.status = status;
-        this.shipped = shipped;
-        this.payment = payment;
-        this.shipmentAddress = shipmentAddress;
-        this.orderItems = orderItems;
-        this.cart = cart;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Order order = (Order) o;
-        return Objects.equals(price, order.price) && status == order.status
-                && Objects.equals(shipped, order.shipped) && Objects.equals(payment, order.payment)
-                && Objects.equals(shipmentAddress, order.shipmentAddress)
-                && Objects.equals(orderItems, order.orderItems) && Objects.equals(cart, order.cart);
+        return getId() != null && Objects.equals(getId(), order.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(price, status, shipped, payment, shipmentAddress, orderItems, cart);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

@@ -3,21 +3,22 @@ package com.vnet.lab.entity;
 import com.vnet.lab.utils.enums.PaymentStatus;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "payments")
 public class Payment extends AbstractEntity{
 
-    @Column(name = "e_payment_id")
+    @Column(name = "paypal_payment_id")
     private String ePaymentId;
 
     @NotNull
@@ -29,23 +30,19 @@ public class Payment extends AbstractEntity{
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    public Payment(String ePaymentId, @NotNull PaymentStatus status, @NotNull BigDecimal amount) {
-        this.ePaymentId = ePaymentId;
-        this.status = status;
-        this.amount = amount;
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Payment payment = (Payment) o;
-        return Objects.equals(ePaymentId, payment.ePaymentId) && status == payment.status
-                && Objects.equals(amount, payment.amount);
+        return getId() != null && Objects.equals(getId(), payment.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(ePaymentId, status, amount);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

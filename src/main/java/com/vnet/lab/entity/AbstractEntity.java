@@ -19,6 +19,6 @@ public class AbstractEntity {
     @Column(name = "created_date", nullable = false)
     private Instant createdDate;
 
-    @Column(name = "last_modified")
+    @Column(name = "last_modified_date")
     private Instant lastModified;
 }
